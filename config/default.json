@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://dom119:dom119@cluster0.q7mag.mongodb.net/Clusters?retryWrites=true&w=majority",
+  "jwtToken" : "mySecretToken",
+  "githubClientID": "c57df31d54194b693457",
+  "githubClientSecret": "de6fa3337ac4afa47c3efd3c313297b9cc7585b5"
+}
