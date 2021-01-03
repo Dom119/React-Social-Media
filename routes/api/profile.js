@@ -6,6 +6,7 @@ const {check, validationResult} = require('express-validator')
 const auth = require('../../middleware/auth')
 const Profile = require('../../models/Profile')
 const User = require('../../models/User')
+const Post = require('../../models/Post')
 
 
 // route    GET api/profile/me
@@ -141,7 +142,7 @@ router.delete('/', auth, async (req, res) => {
     // Remove profile
     // Remove user
     // Remove user posts
-
+    await Post.deleteMany({user: req.user.id})
     await Profile.findOneAndRemove({user: req.user.id})
     await User.findOneAndRemove({_id: req.user.id})
 
@@ -314,6 +315,7 @@ router.get('/github/:username', (req, res) => {
 
     const options = {
       uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('githubClientId')}&client_secret=${config.get('githubClientSecret')}`,
+      // uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=c57df31d54194b693457&client_secret=de6fa3337ac4afa47c3efd3c313297b9cc7585b5`,
       method: "GET",
       headers : {"user-agent": "node.js"}
     }
@@ -321,7 +323,7 @@ router.get('/github/:username', (req, res) => {
     request(options, (error, response, body) => {
       if (error) console.log(error);
       if (response.statusCode !== 200) {
-        return res.status(404).json({msg: "No Gibhub profile found"})
+        return res.status(404).json({msg: "No Github profile found"})
       }
       res.json(JSON.parse(body))
     })

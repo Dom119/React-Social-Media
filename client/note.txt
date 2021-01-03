@@ -1,0 +1,19 @@
+Redux setup
+
+-- The Redux itself is an independent peace of software, we use react-redux to link them with react
+-- The Redux tools of google chrome cannot read the value of redux app automatically, we need to set it up
+
+--> 2 things to set up besides the main redux things
+
+-- create a store.js to create the store for redux
+-- import store, and redux Provider to app.js => make like the Context API
+-- in Reducer, make index.js as the root reducer to gather all reducer, it uses CombineReducer
+-- create Actions
+
+-- Then anytime you want to use that peace of global state, use {connect} from 'react-redux'
+-- we have to import that function, connect that function at the export, then it becomes a props, so we have to put
+   it in the props before using it. 
+-- if use an action in another action => import the function and dispatch(function())
+-- if use in the main level, where store is used, import the function and use store.dispatch(functions())
+
+-- the process is Actions --> Reducer --> result --> then come back to the UI to call that action 
